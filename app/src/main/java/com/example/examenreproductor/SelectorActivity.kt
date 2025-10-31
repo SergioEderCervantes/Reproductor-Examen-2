@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.examenreproductor.databinding.ActivityPlayerBinding
+import com.example.examenreproductor.databinding.ActivitySelectorBinding
 
-class PlayerActivity : AppCompatActivity() {
-    private lateinit var b: ActivityPlayerBinding
+class SelectorActivity : AppCompatActivity() {
+    private lateinit var b: ActivitySelectorBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        b = ActivityPlayerBinding.inflate(layoutInflater)
+        b = ActivitySelectorBinding.inflate(layoutInflater)
         setContentView(b.root)
 
         val songNames = resources.getStringArray(R.array.nombres_canciones)

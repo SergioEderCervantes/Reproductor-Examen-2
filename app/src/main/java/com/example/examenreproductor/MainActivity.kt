@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val exitButton: CustomButton = b.exitButton
 
         enterButton.setOnClickListener {
-            val intent = Intent(this, PlayerActivity::class.java)
+            val intent = Intent(this, SelectorActivity::class.java)
             startActivity(intent)
         }
 
