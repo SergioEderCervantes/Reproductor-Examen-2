@@ -1,21 +1,26 @@
 package com.example.examenreproductor
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.examenreproductor.databinding.ActivityMainBinding
 import com.example.examenreproductor.view.CustomButton
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var b: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        b = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(b.root)
 
-        val enterButton: CustomButton = findViewById(R.id.enterButton)
-        val exitButton: CustomButton = findViewById(R.id.exitButton)
+        val enterButton: CustomButton = b.enterButton
+        val exitButton: CustomButton = b.exitButton
 
-        // El botón Entrar no hace nada por ahora
         enterButton.setOnClickListener {
-            // No action
+            val intent = Intent(this, PlayerActivity::class.java)
+            startActivity(intent)
         }
 
         exitButton.setOnClickListener {
