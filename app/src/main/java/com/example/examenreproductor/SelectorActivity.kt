@@ -1,5 +1,6 @@
 package com.example.examenreproductor
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,9 @@ class SelectorActivity : AppCompatActivity() {
         }
 
         val adapter = SongAdapter(songs) { song ->
-            Toast.makeText(this, "Se ha seleccionado: ${song.name}", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ReproductorActivity::class.java)
+            intent.putExtra("SONG_NAME", song.name)
+            startActivity(intent)
         }
 
         val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
