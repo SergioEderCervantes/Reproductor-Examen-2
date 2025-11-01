@@ -1,3 +1,3 @@
 package com.example.examenreproductor
 
-data class Song(val name: String, val duration: String)
+data class Song(val name: String, val duration: String, val imageResId: Int)

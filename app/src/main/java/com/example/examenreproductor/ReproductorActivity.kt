@@ -14,7 +14,9 @@ class ReproductorActivity : AppCompatActivity() {
         setContentView(b.root)
 
         val songName = intent.getStringExtra("SONG_NAME")
+        val songImageResId = intent.getIntExtra("SONG_IMAGE_RES_ID", R.drawable.ic_launcher_background)
         b.songNameTextview.text = songName
+        b.songImageView.setImageResource(songImageResId)
 
         musicPlayer = MusicPlayer(this)
         musicPlayer.initializePlayer(songName!!.toLowerCase().replace(" ", "_"))

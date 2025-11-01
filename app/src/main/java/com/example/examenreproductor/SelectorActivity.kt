@@ -2,7 +2,6 @@ package com.example.examenreproductor
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.examenreproductor.databinding.ActivitySelectorBinding
@@ -19,12 +18,13 @@ class SelectorActivity : AppCompatActivity() {
         val songDurations = resources.getStringArray(R.array.duracion_canciones)
 
         val songs = songNames.zip(songDurations).map { (name, duration) ->
-            Song(name, duration)
+            Song(name, duration, R.drawable.ic_launcher_background) // Placeholder image
         }
 
         val adapter = SongAdapter(songs) { song ->
             val intent = Intent(this, ReproductorActivity::class.java)
             intent.putExtra("SONG_NAME", song.name)
+            intent.putExtra("SONG_IMAGE_RES_ID", song.imageResId)
             startActivity(intent)
         }
 
