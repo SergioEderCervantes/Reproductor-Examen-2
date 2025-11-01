@@ -1,10 +1,15 @@
 package com.example.examenreproductor
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.ViewAnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.example.examenreproductor.databinding.ActivityMainBinding
 import com.example.examenreproductor.view.CustomButton
+import kotlin.math.hypot
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,8 +24,25 @@ class MainActivity : AppCompatActivity() {
         val exitButton: CustomButton = b.exitButton
 
         enterButton.setOnClickListener {
-            val intent = Intent(this, SelectorActivity::class.java)
-            startActivity(intent)
+            val revealView = b.revealView
+
+            val cx = (enterButton.left + enterButton.right) / 2
+            val cy = (enterButton.top + enterButton.bottom) / 2
+
+            val finalRadius = hypot(revealView.width.toDouble(), revealView.height.toDouble()).toFloat()
+
+            val anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0f, finalRadius)
+            revealView.visibility = View.VISIBLE
+            anim.duration = 500 // Adjust duration as needed
+
+            anim.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    val intent = Intent(this@MainActivity, SelectorActivity::class.java)
+                    startActivity(intent)
+                }
+            })
+
+            anim.start()
         }
 
         exitButton.setOnClickListener {
