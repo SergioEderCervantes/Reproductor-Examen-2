@@ -35,6 +35,11 @@ class CustomButton @JvmOverloads constructor(
     fun setColor(color: Int) {
         val cornerRadius = 30f * resources.displayMetrics.density
 
+        // Determine text color based on background brightness
+        val brightness = Color.red(color) * 0.299 + Color.green(color) * 0.587 + Color.blue(color) * 0.114
+        val textColor = if (brightness > 186) context.getColor(R.color.primary_color) else Color.WHITE
+        button.setTextColor(textColor)
+
         // Default state drawable
         val defaultDrawable = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
