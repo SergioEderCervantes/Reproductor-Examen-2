@@ -18,6 +18,8 @@ class ReproductorActivity : AppCompatActivity() {
 
         musicPlayer = MusicPlayer(this)
         musicPlayer.initializePlayer(songName!!.toLowerCase().replace(" ", "_"))
+        musicPlayer.play()
+        b.musicPlayerView.setPlaying(true)
 
         b.musicPlayerView.setOnPlayPauseClickListener {
             if (musicPlayer.isPlaying()) {
