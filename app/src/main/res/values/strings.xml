@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ExamenReproductor</string>
     <string-array name="nombres_canciones">
-        <item>Primera Rola</item>
+        <item>Development</item>
         <item>Segunda Rola</item>
         <item>Tercera Rola</item>
         <item>Cuarta Rola</item>

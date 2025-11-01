@@ -22,19 +22,21 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/song_name_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary_color"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:textAlignment="center"
-            android:layout_marginBottom="16dp"
-            android:layout_weight="1"
+    <TextView
+        android:id="@+id/song_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_color"
+        android:layout_marginTop="16dp"/>
 
-            />
-    </LinearLayout>
+    <com.example.examenreproductor.view.MusicPlayerView
+        android:id="@+id/music_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"/>
+
+</LinearLayout>
 
 </LinearLayout>
