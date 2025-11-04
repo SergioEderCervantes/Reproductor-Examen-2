@@ -18,7 +18,9 @@ class SelectorActivity : AppCompatActivity() {
         val songDurations = resources.getStringArray(R.array.duracion_canciones)
 
         val songs = songNames.zip(songDurations).map { (name, duration) ->
-            Song(name, duration, R.drawable.ic_launcher_background) // Placeholder image
+            val imageName = name.lowercase().replace(" ", "_")
+            val imageResId = resources.getIdentifier(imageName, "drawable", packageName)
+            Song(name, duration, imageResId)
         }
 
         val adapter = SongAdapter(songs) { song ->
@@ -28,9 +30,8 @@ class SelectorActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        b.recyclerView.layoutManager = LinearLayoutManager(this)
+        b.recyclerView.adapter = adapter
 
         b.button.setOnClickListener { finish() }
     }

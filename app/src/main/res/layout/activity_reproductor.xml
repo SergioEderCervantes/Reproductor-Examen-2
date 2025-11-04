@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+
         >
 
         <Button
@@ -30,8 +31,10 @@
             android:layout_weight="1"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:textAlignment="center"
             android:textColor="@color/primary_color"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
 
 
 

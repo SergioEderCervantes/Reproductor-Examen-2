@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.FrameLayout
 import com.example.examenreproductor.R
+import com.example.examenreproductor.databinding.CustomButtonBinding
 
 class CustomButton @JvmOverloads constructor(
     context: Context,
@@ -16,11 +17,9 @@ class CustomButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var button: Button
-
+    private lateinit var b: CustomButtonBinding
     init {
-        LayoutInflater.from(context).inflate(R.layout.custom_button, this, true)
-        button = findViewById(R.id.internal_button)
+        b = CustomButtonBinding.inflate(LayoutInflater.from(context), this, true)
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.CustomButton)
         setText(attributes.getString(R.styleable.CustomButton_buttonText))
@@ -29,7 +28,7 @@ class CustomButton @JvmOverloads constructor(
     }
 
     fun setText(text: String?) {
-        button.text = text
+        b.internalButton.text = text
     }
 
     fun setColor(color: Int) {
@@ -38,7 +37,7 @@ class CustomButton @JvmOverloads constructor(
         // Determine text color based on background brightness
         val brightness = Color.red(color) * 0.299 + Color.green(color) * 0.587 + Color.blue(color) * 0.114
         val textColor = if (brightness > 186) context.getColor(R.color.primary_color) else Color.WHITE
-        button.setTextColor(textColor)
+        b.internalButton.setTextColor(textColor)
 
         // Default state drawable
         val defaultDrawable = GradientDrawable().apply {
@@ -77,10 +76,10 @@ class CustomButton @JvmOverloads constructor(
             addState(intArrayOf(), defaultDrawable) // Default state
         }
 
-        button.background = stateListDrawable
+        b.internalButton.background = stateListDrawable
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        button.setOnClickListener(l)
+        b.internalButton.setOnClickListener(l)
     }
 }

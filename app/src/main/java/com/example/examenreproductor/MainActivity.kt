@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
             val anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, 0f, finalRadius)
             revealView.visibility = View.VISIBLE
-            anim.duration = 500 // Adjust duration as needed
+            anim.duration = 500
 
             anim.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        // Reset the state if returning to the activity
         if (b.revealView.visibility == View.VISIBLE) {
             val enterButton = b.enterButton
             val revealView = b.revealView

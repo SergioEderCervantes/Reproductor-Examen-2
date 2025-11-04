@@ -7,9 +7,9 @@
         <item>Intentalo</item>
     </string-array>
     <string-array name="duracion_canciones">
-        <item>3:10</item>
-        <item>3:10</item>
-        <item>3:10</item>
-        <item>3:10</item>
+        <item>4:04</item>
+        <item>3:28</item>
+        <item>2:48</item>
+        <item>3:18</item>
     </string-array>
 </resources>
