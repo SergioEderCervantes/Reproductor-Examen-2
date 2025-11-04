@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">ExamenReproductor</string>
     <string-array name="nombres_canciones">
-        <item>Development</item>
-        <item>Segunda Rola</item>
-        <item>Tercera Rola</item>
-        <item>Cuarta Rola</item>
+        <item>Terrenal</item>
+        <item>Si tu me quisieras</item>
+        <item>Rumba Alienigena</item>
+        <item>Intentalo</item>
     </string-array>
     <string-array name="duracion_canciones">
         <item>3:10</item>

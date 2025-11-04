@@ -49,4 +49,27 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
         }
     }
+    override fun onResume() {
+        super.onResume()
+        // Reset the state if returning to the activity
+        if (b.revealView.visibility == View.VISIBLE) {
+            val enterButton = b.enterButton
+            val revealView = b.revealView
+
+            val cx = (enterButton.x + enterButton.width / 2).toInt()
+            val cy = (enterButton.y + enterButton.height / 2).toInt()
+
+            val initialRadius = hypot(revealView.width.toDouble(), revealView.height.toDouble()).toFloat()
+
+            val anim = ViewAnimationUtils.createCircularReveal(revealView, cx, cy, initialRadius, 0f)
+            anim.duration = 500 // Adjust duration as needed
+
+            anim.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    revealView.visibility = View.INVISIBLE
+                }
+            })
+            anim.start()
+        }
+    }
 }
