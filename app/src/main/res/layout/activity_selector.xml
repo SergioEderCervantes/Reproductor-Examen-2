@@ -42,6 +42,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="588dp" />
+
+    <TextView
+        android:id="@+id/sorry"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:layout_weight="1"
+        android:text="Perdóneme profe soy backend"
+        android:textAlignment="center"
+        android:textColor="@color/primary_color"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
