@@ -23,13 +23,11 @@ class ReproductorActivity : AppCompatActivity() {
             musicPlayerService = binder.getService()
             isBound = true
 
-            // Player is initialized and started from onStart
-            // Set listener to update local UI
             musicPlayerService?.setOnStateChangedListener { isPlaying ->
                 b.musicPlayerView.setPlaying(isPlaying)
                 sendUpdateWidgetBroadcast()
             }
-            // Sync UI with service state
+
             b.musicPlayerView.setPlaying(musicPlayerService?.isPlaying() ?: false)
             sendUpdateWidgetBroadcast()
         }
@@ -75,8 +73,8 @@ class ReproductorActivity : AppCompatActivity() {
             putExtra("SONG_NAME", songName)
             putExtra("SONG_IMAGE_RES_ID", songImageResId)
         }
-        startService(serviceIntent) // Start the service to keep it running
-        bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE) // Bind to interact with it
+        startService(serviceIntent)
+        bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onStop() {

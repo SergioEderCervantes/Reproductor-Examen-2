@@ -110,7 +110,6 @@ class MusicPlayerService : Service() {
             .setContentTitle("Reproductor de Música")
             .setContentText(songTitle)
             .setSmallIcon(R.drawable.ic_play)
-            // Add actions in a real app
             .build()
     }
 

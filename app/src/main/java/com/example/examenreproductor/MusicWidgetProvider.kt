@@ -52,14 +52,12 @@ class MusicWidgetProvider : AppWidgetProvider() {
     private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val views = RemoteViews(context.packageName, R.layout.music_widget_layout)
 
-        // Create PendingIntent for Play/Pause button
         val playPauseIntent = Intent(context, MusicPlayerService::class.java).apply {
             action = ACTION_PLAY_PAUSE
         }
         val playPausePendingIntent = PendingIntent.getService(context, 0, playPauseIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.widget_play_pause_button, playPausePendingIntent)
 
-        // Create PendingIntent for Stop button
         val stopIntent = Intent(context, MusicPlayerService::class.java).apply {
             action = ACTION_STOP
         }
