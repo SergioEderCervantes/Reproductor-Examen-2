@@ -14,6 +14,7 @@ class MusicPlayerService : Service() {
     private val binder = LocalBinder()
     private var musicPlayer: MusicPlayer? = null
     private var currentSongName: String? = null
+    private var currentSongImageResId: Int = -1
 
     companion object {
         const val CHANNEL_ID = "MusicPlayerServiceChannel"
@@ -33,8 +34,10 @@ class MusicPlayerService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val songNameToPlay = intent?.getStringExtra("SONG_NAME")
+        val songImageResIdToPlay = intent?.getIntExtra("SONG_IMAGE_RES_ID", -1) ?: -1
 
         if (songNameToPlay != null && songNameToPlay != currentSongName) {
+            currentSongImageResId = songImageResIdToPlay
             initializePlayer(songNameToPlay)
             play()
         }
@@ -116,6 +119,7 @@ class MusicPlayerService : Service() {
             action = MusicWidgetProvider.ACTION_UPDATE_WIDGET
             putExtra(MusicWidgetProvider.EXTRA_SONG_TITLE, currentSongName)
             putExtra(MusicWidgetProvider.EXTRA_IS_PLAYING, isPlaying)
+            putExtra(MusicWidgetProvider.EXTRA_SONG_IMAGE_RES_ID, currentSongImageResId)
         }
         sendBroadcast(intent)
     }

@@ -16,6 +16,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
         const val ACTION_UPDATE_WIDGET = "com.example.examenreproductor.ACTION_UPDATE_WIDGET"
         const val EXTRA_SONG_TITLE = "com.example.examenreproductor.EXTRA_SONG_TITLE"
         const val EXTRA_IS_PLAYING = "com.example.examenreproductor.EXTRA_IS_PLAYING"
+        const val EXTRA_SONG_IMAGE_RES_ID = "com.example.examenreproductor.EXTRA_SONG_IMAGE_RES_ID"
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -30,6 +31,7 @@ class MusicWidgetProvider : AppWidgetProvider() {
         if (intent.action == ACTION_UPDATE_WIDGET) {
             val songTitle = intent.getStringExtra(EXTRA_SONG_TITLE)
             val isPlaying = intent.getBooleanExtra(EXTRA_IS_PLAYING, false)
+            val songImageResId = intent.getIntExtra(EXTRA_SONG_IMAGE_RES_ID, -1)
             val appWidgetManager = AppWidgetManager.getInstance(context)
             val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, MusicWidgetProvider::class.java))
 
@@ -37,6 +39,11 @@ class MusicWidgetProvider : AppWidgetProvider() {
                 val views = RemoteViews(context.packageName, R.layout.music_widget_layout)
                 views.setTextViewText(R.id.widget_song_title, songTitle ?: "Unknown Song")
                 views.setImageViewResource(R.id.widget_play_pause_button, if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play)
+
+                if (songImageResId != -1) {
+                    views.setImageViewResource(R.id.widget_album_art, songImageResId)
+                }
+
                 appWidgetManager.updateAppWidget(appWidgetId, views)
             }
         }

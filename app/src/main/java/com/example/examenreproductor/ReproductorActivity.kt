@@ -15,6 +15,7 @@ class ReproductorActivity : AppCompatActivity() {
     private var musicPlayerService: MusicPlayerService? = null
     private var isBound = false
     private var songName: String? = null
+    private var songImageResId: Int = -1
 
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -26,9 +27,11 @@ class ReproductorActivity : AppCompatActivity() {
             // Set listener to update local UI
             musicPlayerService?.setOnStateChangedListener { isPlaying ->
                 b.musicPlayerView.setPlaying(isPlaying)
+                sendUpdateWidgetBroadcast()
             }
             // Sync UI with service state
             b.musicPlayerView.setPlaying(musicPlayerService?.isPlaying() ?: false)
+            sendUpdateWidgetBroadcast()
         }
 
         override fun onServiceDisconnected(arg0: ComponentName) {
@@ -42,7 +45,7 @@ class ReproductorActivity : AppCompatActivity() {
         setContentView(b.root)
 
         songName = intent.getStringExtra("SONG_NAME")
-        val songImageResId = intent.getIntExtra("SONG_IMAGE_RES_ID", R.drawable.ic_launcher_background)
+        songImageResId = intent.getIntExtra("SONG_IMAGE_RES_ID", R.drawable.ic_launcher_background)
         b.songNameTextview.text = songName
         b.songImageView.setImageResource(songImageResId)
 
@@ -70,6 +73,7 @@ class ReproductorActivity : AppCompatActivity() {
         super.onStart()
         val serviceIntent = Intent(this, MusicPlayerService::class.java).apply {
             putExtra("SONG_NAME", songName)
+            putExtra("SONG_IMAGE_RES_ID", songImageResId)
         }
         startService(serviceIntent) // Start the service to keep it running
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE) // Bind to interact with it
@@ -81,5 +85,15 @@ class ReproductorActivity : AppCompatActivity() {
             unbindService(connection)
             isBound = false
         }
+    }
+
+    private fun sendUpdateWidgetBroadcast() {
+        val intent = Intent(this, MusicWidgetProvider::class.java).apply {
+            action = MusicWidgetProvider.ACTION_UPDATE_WIDGET
+            putExtra(MusicWidgetProvider.EXTRA_SONG_TITLE, songName)
+            putExtra(MusicWidgetProvider.EXTRA_IS_PLAYING, musicPlayerService?.isPlaying() ?: false)
+            putExtra(MusicWidgetProvider.EXTRA_SONG_IMAGE_RES_ID, songImageResId)
+        }
+        sendBroadcast(intent)
     }
 }
